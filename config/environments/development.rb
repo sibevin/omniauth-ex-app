@@ -25,7 +25,7 @@ Rails.application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: Rails.application.secrets.mailer_sender,
-    password: Rails.application.secrets.pw
+    password: Rails.application.secrets.mailer_pw
   }
 
   # Print deprecation notices to the Rails logger.
