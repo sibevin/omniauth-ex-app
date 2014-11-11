@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20141111041531) do
   create_table "omniauth_refs", force: true do |t|
     t.integer  "pid",        limit: 1, null: false
     t.string   "uuid",                 null: false
-    t.integer  "user_id",              null: false
+    t.integer  "user_id"
     t.string   "account"
     t.datetime "created_at"
     t.datetime "updated_at"

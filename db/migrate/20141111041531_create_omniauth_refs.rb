@@ -3,7 +3,7 @@ class CreateOmniauthRefs < ActiveRecord::Migration
     create_table :omniauth_refs do |t|
       t.integer :pid, limit: 1, null: false
       t.string :uuid, null: false
-      t.references :user, null: false
+      t.references :user
       t.string :account
       t.timestamps
     end
