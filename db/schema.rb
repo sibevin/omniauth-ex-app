@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110082403) do
+ActiveRecord::Schema.define(version: 20141111041531) do
+
+  create_table "omniauth_refs", force: true do |t|
+    t.integer  "pid",        limit: 1, null: false
+    t.string   "uuid",                 null: false
+    t.integer  "user_id",              null: false
+    t.string   "account"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "omniauth_refs", ["pid", "uuid"], name: "index_omniauth_refs_on_pid_and_uuid", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
