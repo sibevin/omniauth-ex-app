@@ -1,9 +1,26 @@
 <h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
 
 <% if user_signed_in? %>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+  <p>Email: <%= current_user.email %></p>
+  <p>OmniauthRefs: <%= current_user.omniauth_refs.map { |omni_ref| omni_ref.account }.join(', ') %></p>
+  <ul>
+    <li>
+      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+    </li>
+    <li>
+      <%= link_to "Bind with Facebook", user_omniauth_authorize_path(:facebook) %>
+    </li>
+  </ul>
 <% else %>
-  <%= link_to('Sign In', new_user_session_path) %>
-  <%= link_to('Sign Up', new_user_registration_path) %>
+  <ul>
+    <li>
+      <%= link_to('Sign In', new_user_session_path) %>
+    </li>
+    <li>
+      <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+    </li>
+    <li>
+      <%= link_to('Sign Up', new_user_registration_path) %>
+    </li>
+  </ul>
 <% end %>
