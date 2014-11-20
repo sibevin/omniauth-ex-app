@@ -3,6 +3,7 @@
 ## Run
 
 1. Copy config/secret.yml.example to config/secrets.yml and assign proper values.
+1. Copy config/database.yml.example to config/database.yml and assign proper values.
 2. Run database migration.
 3. Run rails server.
 
