@@ -32,6 +32,10 @@ gem 'omniauth-facebook'
 
 gem 'random_token'
 
+group :development do
+  gem 'pry-byebug'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
