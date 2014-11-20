@@ -1,5 +1,8 @@
 class OmniauthRef < ActiveRecord::Base
   belongs_to :user
+
+  validates :pid, presence: true
+  validates :uuid, uniqueness: { scope: :pid }, presence: true
   validates :bind_token, uniqueness: true, allow_blank: true
 
   def bound?
