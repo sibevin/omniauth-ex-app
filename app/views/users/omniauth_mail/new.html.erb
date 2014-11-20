@@ -1,0 +1,17 @@
+<h1>Users::OmniauthMail#new</h1>
+
+<%= form_tag(users_omniauth_mail_index_path, method: "post") do %>
+  <div class="field">
+    <%= label_tag "email", "Email" %><br />
+    <%= email_field "user", "email", autofocus: true %>
+  </div>
+  <div class="field">
+    <%= label_tag "email_confirmation", "Email Confirmation" %><br />
+    <%= email_field "user", "email_confirmation" %>
+  </div>
+  <%= hidden_field_tag("token", @token) %>
+  <div class="actions">
+    <%= submit_tag "Sign up" %>
+  </div>
+<% end %>
+
