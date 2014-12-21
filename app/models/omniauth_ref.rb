@@ -21,7 +21,7 @@ class OmniauthRef < ActiveRecord::Base
       user = User.new(email: email,
                       password: password,
                       password_confirmation: password)
-      user.skip_confirmation!
+      #user.skip_confirmation!
       user.save
       self.bind_token = nil
       self.user_id = user.id
