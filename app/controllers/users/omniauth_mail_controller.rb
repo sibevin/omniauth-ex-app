@@ -34,4 +34,31 @@ class Users::OmniauthMailController < ApplicationController
       end
     end
   end
+
+  def show
+    @token = params[:id]
+    omni_ref = OmniauthRef.where(bind_token: @token).take
+    if user = omni_ref && omni_ref.user
+      @email = user.email
+    else
+      flash[:notice] = "Invalid binding token."
+      redirect_to new_user_registration_path and return
+    end
+  end
+
+  def destroy
+    omni_ref = OmniauthRef.where(bind_token: params[:id]).take
+    if user = omni_ref && omni_ref.user
+      ActiveRecord::Base.transaction do
+        omni_ref.destroy!
+        user.destroy!
+      end
+      flash[:notice] = "Your email is reset, please login with FB account again."
+      redirect_to new_user_registration_path
+    else
+      flash[:notice] = "Fail to reset FB information, please try again later."
+      redirect_to new_user_registration_path
+    end
+  end
+
 end

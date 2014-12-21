@@ -70,7 +70,11 @@ class OmniauthProvider::Base
 
   # Find the user associated with current omniauth ref.
   def find_user
-    return @omni_ref ?  @omni_ref.user : nil
+    if @omni_ref
+      { user: @omni_ref.user, ref: @omni_ref }
+    else
+      { user: nil, ref: nil }
+    end
   end
 
   # Create the user associated with current omniauth ref.

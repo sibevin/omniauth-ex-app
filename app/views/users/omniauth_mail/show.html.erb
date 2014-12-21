@@ -1,0 +1,4 @@
+<h1> Your account is not confirmed !! </h1>
+<p> Please receive the confirmation mail in <%= @email %> </p>
+<p> <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(:user) %></p>
+<p> <%= link_to "I want to change the mail address", users_mail_path(@token), :method => :delete %> </p>

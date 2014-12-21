@@ -30,7 +30,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         raise :binding_failed
       end
     else
-      user = provider.find_user
+      find_result = provider.find_user
+      user = find_result[:user]
       unless user
         result = provider.create_user
         case result[:behavior]
@@ -59,6 +60,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
       end
       raise :failed unless user.persisted?
+      unless user.confirmed?
+        redirect_to users_mail_path(find_result[:ref].bind_token) and return
+      end
       sign_in_and_redirect user, :event => :authentication, :notice => "Signed in successfully."
     end
   rescue StandardError => e

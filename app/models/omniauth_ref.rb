@@ -6,7 +6,7 @@ class OmniauthRef < ActiveRecord::Base
   validates :bind_token, uniqueness: true, allow_blank: true
 
   def bound?
-    self.bind_token.blank?
+    self.user_id.blank?
   end
 
   # Create a user bound with the omniauth ref
@@ -23,7 +23,6 @@ class OmniauthRef < ActiveRecord::Base
                       password_confirmation: password)
       #user.skip_confirmation!
       user.save
-      self.bind_token = nil
       self.user_id = user.id
       self.save
     end
