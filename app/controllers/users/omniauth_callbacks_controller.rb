@@ -37,7 +37,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           when :no_email
             if result[:status] == :succ
               flash[:notice] = "You need provide the email before you continue."
-              redirect_to new_users_omniauth_mail_path(t: result[:ref].bind_token) and return
+              redirect_to new_users_mail_path(t: result[:ref].bind_token) and return
             else
               flash[:notice] = "Fail to bind the #{provider.provider_display} account. Please try again."
               raise :no_email_failed

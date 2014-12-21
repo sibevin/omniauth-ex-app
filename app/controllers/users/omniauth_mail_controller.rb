@@ -15,12 +15,12 @@ class Users::OmniauthMailController < ApplicationController
     end
     if params[:user][:email] != params[:user][:email_confirmation]
       flash[:notice] = "This email and email confirmation is not the same."
-      redirect_to new_users_omniauth_mail_path(t: params[:token]) and return
+      redirect_to new_users_mail_path(t: params[:token]) and return
     end
     if user = User.where(email: params[:user][:email]).take
       # NOTE: This email is already used
       flash[:notice] = "This email is already used, please choose another one."
-      redirect_to new_users_omniauth_mail_path(t: params[:token]) and return
+      redirect_to new_users_mail_path(t: params[:token]) and return
     end
     if omni_ref.user
       sign_in_and_redirect omni_ref.user, :event => :authentication, :notice => "Signed in successfully."
@@ -30,7 +30,7 @@ class Users::OmniauthMailController < ApplicationController
         sign_in_and_redirect user, :event => :authentication, :notice => "Signed in successfully."
       else
         flash[:notice] = "Fail to create the #{provider.provider_display} account. Please try again."
-        redirect_to new_users_omniauth_mail_path(t: params[:token])
+        redirect_to new_users_mail_path(t: params[:token])
       end
     end
   end
